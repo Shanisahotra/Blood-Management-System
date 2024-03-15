@@ -7,7 +7,8 @@ const Navbar = () => {
       <div className="navbar-container">
       <Link to="/" className="admin-icon">Blood Management System</Link>
         <Link to="/login" className="admin-icon">Admin</Link>
-       
+      
+      
         
       </div>
     </nav>

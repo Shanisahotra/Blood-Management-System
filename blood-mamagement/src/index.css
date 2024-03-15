@@ -60,6 +60,7 @@ Login form */
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 4px;
+  outline: none;
 }
 
 .login-button {

@@ -1,5 +1,6 @@
 import React from 'react';
 import './Sidebar.css'; // Import CSS file for styling
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   return (
@@ -8,10 +9,11 @@ const Sidebar = () => {
         <h3>My Sidebar</h3>
       </div>
       <ul className="sidebar-menu">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Services</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/about'>About Us</Link></li>
+        <li><Link to='/service'>Service</Link></li>
+        <li><Link to='/contact'>Contact us</Link></li>
+     
       </ul>
     </div>
   );

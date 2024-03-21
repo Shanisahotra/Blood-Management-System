@@ -4,23 +4,7 @@ body {
   padding: 0;
 }
 
-.navbar {
-  background-color: rgb(190, 63, 63);
-  color: #fff;
-  padding: 30px;
-}
 
-.navbar-container {
-  display: flex;
-  /* justify-content: flex-end; */
-  justify-content:  space-between;
-}
-
-.admin-icon {
-  color: #fff;
-  text-decoration: none;
-  margin-right: 10px;
-}
 
 .login-container {
   display: flex;

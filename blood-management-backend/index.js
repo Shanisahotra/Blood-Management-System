@@ -1,32 +1,14 @@
- // 'mongodb://127.0.0.1:27017/Products'
-
 const express = require("express");
-const mongoose = require('mongoose');
+require('./db/config');
+const User = require("./db/Users");
 const app = express();
-const connectDB = async ()=>{
-    mongoose.connect('mongodb://localhost:27017/Student');
-    const productSchema = new mongoose.Schema({});
-    const product = mongoose.model('students',productSchema);
-    const data = await product.find();
-    console.log(data);
-     console.log('App is working');
+app.use(express.json());
+app.post("/register", async(req,resp)=>{
+   let user = new User(req.body);
+   let result = await user.save();
+   resp.send(result);
+    
+})
 
-} 
-connectDB();
+app.listen(3100);
 
-app.listen(3800);
-
-// const {MongoClient} = require('mongodb');
-// const url = 'mongodb://localhost:27017';
-// const database = 'Products'
-// const client = new MongoClient(url);
-
-// async function getData(){
-//     let result = await client.connect();
-//     let db = result.db(database);
-//     let collection = db.collection('product');
-//     let response = await collection.find({}).toArray();
-//     console.log(response);
-// }
-
-// getData();

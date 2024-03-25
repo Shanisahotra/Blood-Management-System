@@ -28,10 +28,10 @@ const Navbar = () => {
             :
             <>
             <Link to="/register" className="nav-link"><SiGnuprivacyguard /> Register</Link>
-            <Link to="/login" className="nav-link"><FiLogIn /> Login</Link>
+            
             </>
           }
-         
+         <Link to="/login" className="nav-link"><FiLogIn /> Login</Link>
         </div>
       </div>
     </nav>

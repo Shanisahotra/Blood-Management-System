@@ -1,42 +1,40 @@
-import Sidebar from "./Sidebar";
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Login.css'; // Import CSS file for styling
 
-const Login = () => {
-  
-  const [username, setUsername] = useState('');
+const LoginForm = () => {
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // Example state for user authentication
-  const navigate = useNavigate();
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
-    // Check if username and password are valid (replace this with your validation logic)
-    if (username === 'admin' && password === 'admin123') {
-      // Redirect to dashboard if login is successful
-      navigate("/sidebar");
-      setIsLoggedIn(true);
-    } else {
-      setError('Invalid username or password');
+    try {
+      const response = await axios.post('http://localhost:3100/login', { email, password });
+      console.log(response.data); // Handle successful login response
+    } catch (error) {
+      setError('Invalid email or password'); // Handle login error
     }
   };
 
-
   return (
-    <div className="login-container">
-      <h1>Login Page</h1>
-      <form className="login-form" onSubmit={handleLogin}>
-        {/* Add login form fields */}
-        <input type="text" placeholder="Username" className="input-field" value={username} onChange={(e) => setUsername(e.target.value)} />
-        <input type="password" placeholder="Password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} />
+    <div className="login-form-container">
+      <h2>Login</h2>
+      <form onSubmit={handleLogin} className="login-form">
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
+          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
+          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </div>
         <button type="submit" className="login-button">Login</button>
       </form>
       {error && <p className="error-message">{error}</p>}
-      {isLoggedIn && <Sidebar/>} {/* Render Dashboard component when isLoggedIn is true */}
     </div>
   );
 };
 
-export default Login;
+export default LoginForm;

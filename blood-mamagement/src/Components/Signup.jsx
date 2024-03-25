@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 function Signup() {
@@ -7,6 +7,13 @@ function Signup() {
   const [password, setPassword] = useState('');
   const [message,setMessage] = useState('');
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    const auth = localStorage.getItem('user');
+    if(auth){
+      navigate('/')
+    }
+  })
 
   const collectData = async (e) => {
     e.preventDefault();
@@ -18,7 +25,7 @@ function Signup() {
       });
       console.log('Response:', response.data);
       //Registered data store in localstorage
-      const local = localStorage.setItem('user', JSON.stringify(response.data));
+       localStorage.setItem('user', JSON.stringify(response.data));
       // Optionally, you can perform any further actions after successful submission
       setName('');
       setEmail('');
@@ -29,7 +36,7 @@ function Signup() {
       }else{
         setMessage('Registartion successfuly');
       }
-      navigate('/login');
+     
 
     } catch (error) {
       console.error('Error:', error);

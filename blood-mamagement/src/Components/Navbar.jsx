@@ -9,9 +9,10 @@ import './Navbar.css'; // Import your CSS file where you define custom styles
 import { useNavigate } from 'react-router-dom';
 const Navbar = () => {
   let auth = localStorage.getItem('user');
-
+  const nagviagate = useNavigate();
   const logout = () =>{
     localStorage.clear();
+    nagviagate('/register')
   }
  
   return (
@@ -23,7 +24,7 @@ const Navbar = () => {
         </div>
         <div className="links-container">
           {
-            auth?   <Link to="/" className="nav-link" onClick={logout}>Logout</Link>
+            auth?   <Link className="nav-link" onClick={logout}>Logout</Link>
             :
             <>
             <Link to="/register" className="nav-link"><SiGnuprivacyguard /> Register</Link>

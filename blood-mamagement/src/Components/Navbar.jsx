@@ -6,17 +6,15 @@ import { BiDonateBlood } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { SiGnuprivacyguard } from "react-icons/si";
 import './Navbar.css'; // Import your CSS file where you define custom styles
-// import { useNavigate } from 'react-router-dom';
+
 const Navbar = () => {
   let auth = localStorage.getItem('user');
-  const navigate = useNavigate();
+  const navigate =  useNavigate();
   const Logout = ()=>{
     localStorage.clear();
     navigate('/register')
   }
- 
- 
-  return (
+   return (
     <nav className="navbar">
       <div className="navbar-container">
         <div className="logo-container">

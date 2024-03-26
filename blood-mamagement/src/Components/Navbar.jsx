@@ -12,7 +12,7 @@ const Navbar = () => {
   const navigate =  useNavigate();
   const Logout = ()=>{
     localStorage.clear();
-    navigate('/register')
+    navigate('/register');
   }
    return (
     <nav className="navbar">
@@ -23,11 +23,10 @@ const Navbar = () => {
         </div>
         <div className="links-container">
           {
-            auth ?   <Link className="nav-link" onClick={Logout} >Logout</Link>
+            auth ?<Link className="nav-link"  onClick={Logout} >Logout</Link>
             :
             <>
             <Link to="/register" className="nav-link"><SiGnuprivacyguard /> Register</Link>
-            
             </>
           }
            <Link to="/login" className="nav-link"><FiLogIn /> Login</Link>         

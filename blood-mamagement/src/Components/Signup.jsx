@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './Sign.css';
+
 function Signup() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message,setMessage] = useState('');
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  useEffect(()=>{
+  useEffect(() => {
     const auth = localStorage.getItem('user');
-    if(auth){
-      navigate('/')
+    if (auth) {
+      navigate('/');
     }
-  })
+  }, [navigate]);
 
   const collectData = async (e) => {
-       e.preventDefault();
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3100/register', {
         name,
@@ -25,57 +27,44 @@ function Signup() {
       });
       console.log('Response:', response.data);
       //Registered data store in localstorage
-       localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data));
       // Optionally, you can perform any further actions after successful submission
       setName('');
       setEmail('');
       setPassword('');
 
-      if(!name || !email || !password){
+      if (!name || !email || !password) {
         setMessage('Please fill all fields');
-      }else{
-        setMessage('Registartion successfuly');
+      } else {
+        setMessage('Registration successful');
       }
-     
 
     } catch (error) {
       console.error('Error:', error);
       // Optionally, you can handle errors here
     }
-
   };
 
   return (
     <div>
-      <div className="login-container">
-        <h1>Register</h1>
-        <form className="login-form" onSubmit={collectData}>
-          {/* Add login form fields */}
-          <input
-            type="text"
-            placeholder="Username"
-            className="input-field"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="email"
-            placeholder="Email"
-            className="input-field"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder="Password"
-            className="input-field"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className="login-button">Register</button>
-
-          <p>{message}</p>
+      <div className="login-form-container">
+        <h2>Signup</h2>
+        <form onSubmit={collectData} className="login-form">
+          <div className="form-group">
+            <label htmlFor="name">Name:</label>
+            <input type="text" id="name" value={name} onChange={(e) => setName(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button type="submit" className="login-button1">Signup</button>
         </form>
+        {message && <p className="error-message">{message}</p>}
       </div>
     </div>
   );

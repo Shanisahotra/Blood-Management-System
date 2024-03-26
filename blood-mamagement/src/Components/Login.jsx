@@ -13,6 +13,7 @@ const LoginForm = () => {
     try {
       const response = await axios.post('http://localhost:3100/login', { email, password });
       console.log(response.data); // Handle successful login response
+      
     } catch (error) {
       setError('Invalid email or password'); // Handle login error
     }

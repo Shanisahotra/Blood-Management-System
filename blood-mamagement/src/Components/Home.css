@@ -1,18 +1,22 @@
-/* .home{
-   background-image: url('../assets/bloodpic.jpg');
-   height: 60vh;
-   width: 100%;
-    
-
-/* Home.css */
 
 .home-container {
    background-image: url('../assets/bloodpic.jpg'); /* Replace 'path/to/your/image.jpg' with the actual path to your image */
    background-size: cover; /* Cover the entire container */
    background-position: center; /* Center the background image */
-   height: 60vh; /* Set the height to 100% of the viewport height */
+   height: 100vh; /* Set the height to 100% of the viewport height */
    /* Add other styles as needed */
-
-   
  }
- 
+ .para {
+   width: 100%;
+   height: 15vh;
+   display: flex;
+   justify-content: center; /* Horizontally center the content */
+   align-items: center; /* Vertically center the content */
+   text-align: center; /* Center the text horizontally */
+}
+
+.para p {
+   margin: 0; /* Remove default margin */
+   font-size: 20px;
+   font-family: sans-serif;
+}

@@ -1,14 +1,23 @@
 /* Navbar.css */
 
-.navbar {
+
+   .navbar {
     background-color: #ec3d3d;
-    color: hsl(0, 0%, 100%);
-    padding: 30px;
-  }
+    color: #fff;
+    padding: 30px 30px; /* Adjust padding for better spacing */
+    width: 97%;
+    position: fixed; /* Fixed position */
+    top: 0;
+    z-index: 1000;
+}
+
+
   
   .navbar-container {
     display: flex;
-    justify-content: space-between;
+   justify-content: space-between;
+    
+  
   }
   
   .logo-container {
@@ -33,14 +42,18 @@
   .links-container {
     display: flex;
     align-items: center;
+    
+   
   }
   
   .nav-link {
     text-decoration: none;
     color: #fff;
-    margin-left: 20px;
+    margin-left: 30px;
     font-size: 18px;
   }
+  
+ 
   
   .nav-link:hover {
     text-decoration: underline;

@@ -16,7 +16,7 @@ function Signup() {
   })
 
   const collectData = async (e) => {
-    e.preventDefault();
+       e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3100/register', {
         name,

@@ -8,7 +8,7 @@ const LoginForm = () => {
   const [error, setError] = useState('');
 
   const handleLogin = async (e) => {
-    e.preventDefault();
+      e.preventDefault();
 
     try {
       const response = await axios.post('http://localhost:3100/login', { email, password });
@@ -19,6 +19,7 @@ const LoginForm = () => {
   };
 
   return (
+    <div className='main1-login'>
     <div className="login-form-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin} className="login-form">
@@ -30,9 +31,10 @@ const LoginForm = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </div>
-        <button type="submit" className="login-button">Login</button>
+        <button type="submit" className="login-button1">Login</button>
       </form>
       {error && <p className="error-message">{error}</p>}
+    </div>
     </div>
   );
 };

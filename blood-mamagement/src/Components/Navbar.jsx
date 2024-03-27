@@ -1,18 +1,21 @@
+
 // Navbar.js
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link,useNavigate} from 'react-router-dom';
 import { BiDonateBlood } from "react-icons/bi";
 import { FiLogIn } from "react-icons/fi";
 import { SiGnuprivacyguard } from "react-icons/si";
 import './Navbar.css'; // Import your CSS file where you define custom styles
 
+
 const Navbar = () => {
   let auth = localStorage.getItem('user');
-  const navigate =  useNavigate();
+  const navigate = useNavigate();
   const Logout = ()=>{
     localStorage.clear();
     navigate('/register');
+    
   }
    return (
     <nav className="navbar">
@@ -23,7 +26,7 @@ const Navbar = () => {
         </div>
         <div className="links-container">
           {
-            auth ?<Link className="nav-link"  onClick={Logout} >Logout</Link>
+            auth ?<Link className="nav-link" to='register' onClick={Logout} >Logout</Link>
             :
             <>
             <Link to="/register" className="nav-link"><SiGnuprivacyguard /> Register</Link>

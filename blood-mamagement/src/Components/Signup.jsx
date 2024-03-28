@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Sign.css';
 
-function Signup() {
+const Signup =()=> {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -13,7 +13,7 @@ function Signup() {
   useEffect(() => {
     const auth = localStorage.getItem('user');
     if (auth) {
-      navigate('/');
+      navigate('register');
     }
   }, [navigate]);
 

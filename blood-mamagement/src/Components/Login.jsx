@@ -16,21 +16,27 @@ const LoginForm = () => {
     try {
       const response = await axios.post('http://localhost:3100/login', { email, password });
       const userData = response.data;
-      const storedUserData = JSON.parse(localStorage.getItem('user')); // Get registered user data from localStorage
-      if (storedUserData && email === storedUserData.email && password === storedUserData.password) { // Check if email and password match
-        localStorage.setItem('user1', JSON.stringify(userData)); // Store user data in localStorage
-        setIsLoggedIn(true); // Set login status to true
+      console.log('Response from login API:', userData);
+  
+      const storedUserData = JSON.parse(localStorage.getItem('user'));
+      console.log('Stored user data from localStorage:', storedUserData);
+  
+      if (storedUserData && email === storedUserData.email && password === storedUserData.password) {
+        localStorage.setItem('user1', JSON.stringify(userData));
+        setIsLoggedIn(true);
+        console.log('Login successful');
       } else {
-        setError('Invalid email or password'); // Handle login error
+        setError('Invalid email or password');
+        console.log('Login failed: Invalid email or password');
       }
     } catch (error) {
-      setError('Invalid email or password'); // Handle login error
+      setError('An error occurred during login');
+      console.error('Error during login:', error);
+    }
+    if(isLoggedIn){
+      return <Sidebar/>
     }
   };
-
-  if (isLoggedIn) {
-    return <Sidebar />
-  }
 
   return (
     <div className='main1-login'>

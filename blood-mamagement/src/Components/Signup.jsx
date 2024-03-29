@@ -1,3 +1,5 @@
+// Signup.js
+
 import React, { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +12,6 @@ const Signup =()=> {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
- 
   const collectData = async (e) => {
     e.preventDefault();
     try {
@@ -20,26 +21,17 @@ const Signup =()=> {
         password
       });
       console.log('Response:', response.data);
+      navigate('/login')
       //Registered data store in localstorage
-      localStorage.setItem('user', JSON.stringify(response.data));
+      localStorage.setItem('user', JSON.stringify(response.data)); // Store registered user data in localStorage
       // Optionally, you can perform any further actions after successful submission
       setName('');
       setEmail('');
       setPassword('');
-      const auth = localStorage.getItem('user');
-      if(auth){
-        navigate('/login');
-      }
-
-      if (!name || !email || !password) {
-        setMessage('Please fill all fields');
-      } else {
-        setMessage('Registration successful');
-      }
-
+      setMessage('Registration successful');
     } catch (error) {
       console.error('Error:', error);
-      // Optionally, you can handle errors here
+      setMessage('Error occurred while registering');
     }
   };
 

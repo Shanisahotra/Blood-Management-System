@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Sign.css';
@@ -10,13 +10,7 @@ const Signup =()=> {
   const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    const auth = localStorage.getItem('user');
-    if (auth) {
-      navigate('register');
-    }
-  }, [navigate]);
-
+ 
   const collectData = async (e) => {
     e.preventDefault();
     try {
@@ -32,6 +26,10 @@ const Signup =()=> {
       setName('');
       setEmail('');
       setPassword('');
+      const auth = localStorage.getItem('user');
+      if(auth){
+        navigate('/login');
+      }
 
       if (!name || !email || !password) {
         setMessage('Please fill all fields');

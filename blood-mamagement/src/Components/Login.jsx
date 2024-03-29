@@ -1,43 +1,47 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css'; // Import CSS file for styling
+import Sidebar from './Sidebar'; // Import Sidebar component
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
 
   const handleLogin = async (e) => {
-      e.preventDefault();
-
+    e.preventDefault();
     try {
       const response = await axios.post('http://localhost:3100/login', { email, password });
-      console.log(response.data); // Handle successful login response
-      
-      
+      const userData = response.data;
+      localStorage.setItem('user1', JSON.stringify(userData)); // Store user data in localStorage
+      setIsLoggedIn(true); // Set login status to true
     } catch (error) {
       setError('Invalid email or password'); // Handle login error
     }
-    
   };
+
+  if (response.email && response.password) {
+    return <Sidebar />;
+  }
 
   return (
     <div className='main1-login'>
-    <div className="login-form-container">
-      <h2>Login</h2>
-      <form onSubmit={handleLogin} className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email:</label>
-          <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
-        <button type="submit" className="login-button1">Login</button>
-      </form>
-      {error && <p className="error-message">{error}</p>}
-    </div>
+      <div className="login-form-container">
+        <h2>Login</h2>
+        <form onSubmit={handleLogin} className="login-form">
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input type="email" id="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password:</label>
+            <input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </div>
+          <button type="submit" className="login-button1">Login</button>
+        </form>
+        {error && <p className="error-message">{error}</p>}
+      </div>
     </div>
   );
 };

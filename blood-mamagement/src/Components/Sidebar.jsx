@@ -10,13 +10,13 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul className="sidebar-menu">
         <li>
-          <Link to='/home'>
+          <Link >
             <FaHome className="sidebar-Icon" />
             <span className="sidebar-text">Home</span>
           </Link>
         </li>
         <li>
-          <Link to=''>
+          <Link to='/blood-donation'>
             <BiSolidDonateBlood className="sidebar-Icon"/>
             <span className="sidebar-text">Blood Donation</span>
           </Link>

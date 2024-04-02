@@ -29,6 +29,7 @@
 
 .sidebar-menu li a{
    /* Add space between the icon and text */
+   padding: px;
 }
 .sidebar-Icon {
   margin-right: 08px;

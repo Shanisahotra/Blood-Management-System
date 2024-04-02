@@ -4,6 +4,7 @@ import Signup from './Components/Signup';
 import Login from './Components/Login';
 import Home from './Components/Home';
 import Sidebar from './Components/Sidebar';
+import BloodDonation from './Components/Blood-Donation/BloodDonation';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="/register" element={<Signup  />} />
         <Route path="/login" element={<Login />} />
         <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/home" element={<BloodDonation />} />
       </Routes>
     </Router>
   );

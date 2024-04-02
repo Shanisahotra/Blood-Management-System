@@ -8,9 +8,12 @@ const Sidebar = () => {
      
       <ul className="sidebar-menu">
         <li><Link to='/'>Home</Link></li>
-        <li><Link to='/about'>About Us</Link></li>
-        <li><Link to='/service'>Service</Link></li>
-        <li><Link to='/contact'>Contact us</Link></li>
+        <li><Link to='/about'>Donor</Link></li>
+        <li><Link to='/service'>Patient</Link></li>
+        <li><Link to='/contact'>Donations</Link></li>
+        <li><Link to='/about'>Blood Request</Link></li>
+        <li><Link to='/service'>Request History</Link></li>
+        <li><Link to='/contact'>Blood Stock</Link></li>
      
       </ul>
     </div>

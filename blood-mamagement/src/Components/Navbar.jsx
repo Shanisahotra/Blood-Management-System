@@ -1,6 +1,9 @@
 import React from 'react'
 import { BiDonateBlood } from "react-icons/bi";
 import { Link, useNavigate } from 'react-router-dom';
+import { SiGnuprivacyguard } from "react-icons/si";
+import { FiLogIn } from "react-icons/fi";
+import { CiLogout } from "react-icons/ci";
 import './Navbar.css'; // Import your CSS file where you define custom styles
 
 const Navbar = () => {
@@ -10,7 +13,8 @@ const Navbar = () => {
 
   const Logout = () => {
     // Clear only auth1 from localStorage
-    localStorage.removeItem('user');
+    // localStorage.removeItem('user');
+    localStorage.removeItem('user1');
     navigate('/login');
   }
 
@@ -23,12 +27,12 @@ const Navbar = () => {
         </div>
         <div className="links-container">
           {
-            auth ? "" : <Link className="nav-link" to='/register'>Register</Link>
+            auth ? "" : <Link className="nav-link" to='/register'><SiGnuprivacyguard />Register</Link>
           }
           {
             auth1 ?
-              <Link className="nav-link" to='/register' onClick={Logout}>Logout</Link> :
-              <Link className="nav-link" to='login' >Login</Link>
+              <Link className="nav-link" to='/login' onClick={Logout}><CiLogout />Logout</Link> :
+              <Link className="nav-link" to='login' ><FiLogIn />Login</Link>
           }
         </div>
       </div>

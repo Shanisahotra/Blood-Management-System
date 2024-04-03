@@ -5,7 +5,7 @@
       background-color: red;
 }
 .login-form-container {
-    width: 350px;
+    width: 35%;
     margin: 80px auto; /* Adjust margin to center the form vertically */
     padding: 20px;
     border: 1px solid #ec3d3d;
@@ -13,11 +13,13 @@
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
     margin-top: 200px;
+    
 }
 
 .login-form {
     display: flex;
     flex-direction: column;
+    margin: auto;
 }
 
 .form-group {
@@ -28,10 +30,17 @@ label {
     margin-bottom: 5px;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
+.blood-donation{
     width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.blood-donation1{
+    width: 108%;
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;

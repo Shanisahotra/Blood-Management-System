@@ -8,20 +8,20 @@ function BloodDonation() {
     <div>
       <Sidebar /> {/* Render the Sidebar component */}
       <div className="login-form-container">
+       <form className="login-form">
         <h2>Blood Donation</h2>
-        <form className="login-form">
           <div className="form-group">
             <label htmlFor="text">Name:</label>
-            <input type="text" id="name"/>
+            <input className='blood-donation' type="text" id="name"/>
           </div>
           <div className="form-group">
-            <label htmlFor="text">Age:</label>
-            <input type="text" id="text"/>
+            <label htmlFor="number">Age:</label>
+            <input className='blood-donation' type="number" id="number"/>
           </div>
           <div className="form-group">
             <label htmlFor="blood-group">Blood Group:</label>
             <br />
-            <select id="blood-group">
+            <select id="blood-group" className='blood-donation1'>
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -34,12 +34,12 @@ function BloodDonation() {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="email">Unit(in ml):</label>
-            <input type="email" id="email"/>
+            <label htmlFor="text">Unit(in ml):</label>
+            <input className='blood-donation' type="text" id="text"/>
           </div>
           <div className="form-group">
             <label htmlFor="password">Disease (if any):</label>
-            <input type="password" id="password"/>
+            <input className='blood-donation' type="password" id="password"/>
           </div>
           <button type="submit" className="login-button1">Donate</button>
         </form>

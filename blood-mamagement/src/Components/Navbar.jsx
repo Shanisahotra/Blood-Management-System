@@ -12,11 +12,15 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const Logout = () => {
-    // Clear only auth1 from localStorage
-    // localStorage.removeItem('user');
-    localStorage.removeItem('user1');
-    navigate('/login');
+    // Display a confirmation dialog
+    const confirmLogout = window.confirm("Are you sure you want to logout?");
+    if (confirmLogout) {
+      // Clear only auth1 from localStorage
+      localStorage.removeItem('user1');
+      navigate('/login');
+    }
   }
+
 
   return (
     <nav className="navbar">

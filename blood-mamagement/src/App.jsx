@@ -1,3 +1,5 @@
+// App.js
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Signup from './Components/Signup';
@@ -12,14 +14,21 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Signup  />} />
+        <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/sidebar" element={<Sidebar />}/>
-        <Route path="/blood-donation" element={<BloodDonation/>} />
-      
+        <Route path="/blood-donation/*" element={<BloodDonationLayout />} />
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
+function BloodDonationLayout() {
+  return (
+    <>
+      <Sidebar />
+      <BloodDonation />
+    </>
+  );
+}

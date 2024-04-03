@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
-
 import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
@@ -24,6 +23,8 @@ const LoginForm = () => {
         setIsLoggedIn(true);
         console.log('Login successful');
         navigate('/sidebar'); // Navigate to the route where the Sidebar component is rendered
+      
+
       } else {
         setError('Invalid email or password');
         console.log('Login failed: Invalid email or password');

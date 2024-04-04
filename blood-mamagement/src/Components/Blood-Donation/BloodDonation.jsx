@@ -12,6 +12,7 @@ function BloodDonation() {
     disease: ''
   });
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -20,8 +21,10 @@ function BloodDonation() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Clear previous errors
+    // Clear previous errors and success message
     setErrors({});
+    setSuccessMessage('');
+
     // Check for empty fields
     const validationErrors = {};
     for (const key in formData) {
@@ -37,6 +40,16 @@ function BloodDonation() {
         .then(response => {
           // Handle response
           console.log(response);
+          // Show success message
+          setSuccessMessage('Donation successful!');
+          // Clear form data after successful submission
+          setFormData({
+            name: '',
+            age: '',
+            bloodGroup: '',
+            unit: '',
+            disease: ''
+          });
         })
         .catch(error => {
           // Handle error
@@ -53,18 +66,18 @@ function BloodDonation() {
           <h2>Blood Donation</h2>
           <div className="form-group">
             <label htmlFor="name">Name:</label>
-            <input className='blood-donation' type="text" id="name" onChange={handleChange}/>
+            <input className='blood-donation' type="text" id="name" value={formData.name} onChange={handleChange}/>
             {errors.name && <span className="error">{errors.name}</span>}
           </div>
           <div className="form-group">
             <label htmlFor="age">Age:</label>
-            <input className='blood-donation' type="number" id="age" onChange={handleChange}/>
+            <input className='blood-donation' type="number" id="age" value={formData.age} onChange={handleChange}/>
             {errors.age && <span className="error">{errors.age}</span>}
           </div>
           <div className="form-group">
             <label htmlFor="bloodGroup">Blood Group:</label>
             <br />
-            <select id="bloodGroup" className='blood-donation' onChange={handleChange}>
+            <select id="bloodGroup" className='blood-donation' value={formData.bloodGroup} onChange={handleChange}>
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -79,15 +92,17 @@ function BloodDonation() {
           </div>
           <div className="form-group">
             <label htmlFor="unit">Unit (in ml):</label>
-            <input className='blood-donation' type="text" id="unit" onChange={handleChange}/>
+            <input className='blood-donation' type="text" id="unit" value={formData.unit} onChange={handleChange}/>
             {errors.unit && <span className="error">{errors.unit}</span>}
           </div>
           <div className="form-group">
             <label htmlFor="disease">Disease (if any):</label>
-            <input className='blood-donation' type="text" id="disease" onChange={handleChange}/>
+            <input className='blood-donation' type="text" id="disease" value={formData.disease} onChange={handleChange}/>
             {errors.disease && <span className="error">{errors.disease}</span>}
           </div>
           <button type="submit" className="login-button1">Donate</button>
+          <br />
+          {successMessage && <div className="success">{successMessage}</div>}
         </form>
       </div>
     </div>

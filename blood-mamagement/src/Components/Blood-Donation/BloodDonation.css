@@ -70,3 +70,9 @@ label {
     font-size: 14px;
     margin-top: 5px; /* Adjust margin for error messages */
 }
+
+.success {
+    color: green; /* Set success message color to green */
+    font-size: 14px;
+    margin-top: 5px; /* Adjust margin for success messages */
+}

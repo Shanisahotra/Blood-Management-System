@@ -1,9 +1,11 @@
-/* Sign.css */
-.BloodDonation{
-      height: 100vh;
-      width: 100%;
-      background-color: red;
+/* BloodDonation.css */
+
+.BloodDonation {
+    height: 100vh;
+    width: 100%;
+    background-color: red;
 }
+
 .login-form-container {
     width: 35%;
     margin: 80px auto; /* Adjust margin to center the form vertically */
@@ -13,7 +15,6 @@
     background-color: #f9f9f9;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
     margin-top: 200px;
-    
 }
 
 .login-form {
@@ -30,7 +31,7 @@ label {
     margin-bottom: 5px;
 }
 
-.blood-donation{
+.blood-donation {
     width: 100%;
     padding: 10px;
     font-size: 16px;
@@ -39,7 +40,7 @@ label {
     outline: none;
 }
 
-.blood-donation1{
+.blood-donation1 {
     width: 108%;
     padding: 10px;
     font-size: 16px;
@@ -64,8 +65,8 @@ label {
     background-color: #bf3030; /* Darken color on hover */
 }
 
-.error-message {
-    color: red;
+.error {
+    color: red; /* Set error message color to red */
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 5px; /* Adjust margin for error messages */
 }

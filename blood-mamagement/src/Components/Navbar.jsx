@@ -35,7 +35,7 @@ const Navbar = () => {
           }
           {
             auth1 ?
-              <Link className="nav-link" to='/login' onClick={Logout}><CiLogout />Logout</Link> :
+              <Link className="nav-link" to='/login' onClick={Logout}><CiLogout />Logout  ({JSON.parse(auth).name})</Link> :
               <Link className="nav-link" to='login' ><FiLogIn />Login</Link>
           }
         </div>

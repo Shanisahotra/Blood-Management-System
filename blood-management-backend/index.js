@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 require('./db/config');
 const User = require("./db/Users");
+const Blood = require("./db/Blood-Donation");
 const app = express();
 
 app.use(express.json());
@@ -29,5 +30,12 @@ app.post('/login', async(req,resp)=>{
    resp.send({result:"No User Found"})
   }
 })
+
+app.post('/blood-donation', async(req,resp)=>{
+   let blood = new Blood(req.body);
+   let result = await blood.save();
+   resp.send(result);
+})
+
 app.listen(3100);
 

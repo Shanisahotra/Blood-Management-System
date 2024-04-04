@@ -1,27 +1,56 @@
-// BloodDonation.js
-import React from 'react';
-import Sidebar from '../Sidebar'; // Import the Sidebar component
-import './BloodDonation.css'; // Import CSS file for styling
+import React, { useState } from 'react';
+import Sidebar from '../Sidebar';
+import axios from 'axios';
+import './BloodDonation.css';
 
 function BloodDonation() {
+  const [formData, setFormData] = useState({
+    name: '',
+    age: '',
+    bloodGroup: '',
+    unit: '',
+    disease: ''
+  });
+ 
+    
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData({ ...formData, [id]: value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormData('');
+    // Assuming you have an API endpoint for blood donation
+    axios.post('http://localhost:3100/blood-donation', formData)
+      .then(response => {
+        // Handle response
+        console.log(response);
+      })
+      .catch(error => {
+        // Handle error
+        console.error('Error:', error);
+      });
+  };
+
   return (
     <div>
-      <Sidebar /> {/* Render the Sidebar component */}
+      <Sidebar />
       <div className="login-form-container">
-       <form className="login-form">
-        <h2>Blood Donation</h2>
+        <form className="login-form" onSubmit={handleSubmit}>
+          <h2>Blood Donation</h2>
           <div className="form-group">
-            <label htmlFor="text">Name:</label>
-            <input className='blood-donation' type="text" id="name"/>
+            <label htmlFor="name">Name:</label>
+            <input className='blood-donation' type="text" id="name" onChange={handleChange}/>
           </div>
           <div className="form-group">
-            <label htmlFor="number">Age:</label>
-            <input className='blood-donation' type="number" id="number"/>
+            <label htmlFor="age">Age:</label>
+            <input className='blood-donation' type="number" id="age" onChange={handleChange}/>
           </div>
           <div className="form-group">
-            <label htmlFor="blood-group">Blood Group:</label>
+            <label htmlFor="bloodGroup">Blood Group:</label>
             <br />
-            <select id="blood-group" className='blood-donation1'>
+            <select id="bloodGroup" className='blood-donation' onChange={handleChange}>
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
@@ -34,12 +63,12 @@ function BloodDonation() {
             </select>
           </div>
           <div className="form-group">
-            <label htmlFor="text">Unit(in ml):</label>
-            <input className='blood-donation' type="text" id="text"/>
+            <label htmlFor="unit">Unit (in ml):</label>
+            <input className='blood-donation' type="text" id="unit" onChange={handleChange}/>
           </div>
           <div className="form-group">
-            <label htmlFor="password">Disease (if any):</label>
-            <input className='blood-donation' type="password" id="password"/>
+            <label htmlFor="disease">Disease (if any):</label>
+            <input className='blood-donation' type="text" id="disease" onChange={handleChange}/>
           </div>
           <button type="submit" className="login-button1">Donate</button>
         </form>

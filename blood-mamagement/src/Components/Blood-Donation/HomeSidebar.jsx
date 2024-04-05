@@ -10,11 +10,9 @@ const HomeSidebar = () => {
 
   return (
     <div>
-      <div className='home-heading'>
-      <h2>Awesome Table</h2>
-      </div>
       <table>
         <thead>
+        <h2>Donor</h2>
           <tr>
             <th>Name</th>
             <th>Age</th>

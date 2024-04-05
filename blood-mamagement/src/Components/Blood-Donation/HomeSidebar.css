@@ -2,16 +2,11 @@
 table {
     width: 70%;
     border-collapse: collapse;
-    margin-top: 100px; /* Adjust the top margin as needed */
-    margin-left: 400px; /* Center the table horizontally
-    /* margin-right: auto; */ */
+    margin-top: 120px; /* Remove the top margin */
+    margin-left: 380px;
+    
   }
   
-  /* Center the heading */
-  .home-heading {
-    text-align: center;
-    margin-top: 100px; /* Add margin to separate from the table */
-  }
   
   th, td {
     border: 1px solid #dddddd;

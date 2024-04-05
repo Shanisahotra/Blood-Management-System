@@ -10,7 +10,7 @@ const Sidebar = () => {
     <div className="sidebar">
       <ul className="sidebar-menu">
         <li>
-          <Link to='#' >
+          <Link to='/home' >
             <FaHome className="sidebar-Icon" />
             <span className="sidebar-text">Home</span>
           </Link>

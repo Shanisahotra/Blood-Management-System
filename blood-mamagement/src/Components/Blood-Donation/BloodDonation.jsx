@@ -24,7 +24,7 @@ function BloodDonation() {
     // Clear previous errors and success message
     setErrors({});
     setSuccessMessage('');
-    const userId = localStorage.getItem('user1')._id;
+    // const userId = localStorage.getItem('user1')._id;
     // Check for empty fields
     const validationErrors = {};
     for (const key in formData) {

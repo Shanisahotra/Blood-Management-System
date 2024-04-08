@@ -7,6 +7,7 @@ import Home from './Components/Home';
 import Sidebar from './Components/Sidebar';
 import BloodDonation from './Components/Blood-Donation/BloodDonation';
 import HomeSidebar from './Components/Blood-Donation/HomeSidebar';
+import Update from './Components/Blood-Donation/Update';
 
 function App() {
   return (
@@ -16,10 +17,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        {/* Render both Sidebar and HomeSidebar on the /home route */}
         <Route path="/home" element={<HomeLayout />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/blood-donation" element={<BloodDonation />} />
+        <Route path="/update/:id" element={<Update />} /> {/* Route for update component */}
       </Routes>
     </Router>
   );
@@ -30,6 +31,7 @@ const HomeLayout = () => {
     <div>
       <Sidebar />
       <HomeSidebar />
+      
     </div>
   );
 };

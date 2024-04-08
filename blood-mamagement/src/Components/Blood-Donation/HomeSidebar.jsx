@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomeSidebar.css';
 
@@ -23,12 +24,24 @@ const HomeSidebar = () => {
       });
   }, []); // Run once when component mounts
 
+  const handleDelete = async (id) => {
+    try {
+      // Send delete request to the backend API
+      await axios.delete(`http://localhost:3100/donors/${id}`);
+      // Update the state to remove the deleted donor
+      setDonors(donors.filter(donor => donor._id !== id));
+    } catch (error) {
+      console.error('Error deleting donor:', error);
+    }
+  };
+
   return (
     <div>
       <table>
         <thead>
-        <h2>Donors</h2>
+          <h2>Donors</h2>
           <tr>
+            <th>S. No.</th>
             <th>Name</th>
             <th>Age</th>
             <th>Blood Group</th>
@@ -39,13 +52,17 @@ const HomeSidebar = () => {
         </thead>
         <tbody>
           {donors.map((donor, index) => (
-            <tr key={index}>
+            <tr key={donor._id}>
+              <td>{index + 1}</td>
               <td>{donor.name}</td>
               <td>{donor.age}</td>
               <td>{donor.bloodGroup}</td>
               <td>{donor.unit}</td>
               <td>{donor.disease}</td>
-              <td><button>Delete</button></td>
+              <td>
+                <button onClick={() => handleDelete(donor._id)}>Delete</button>
+                <Link to={`/update/${donor._id}`}>Update</Link>
+              </td>
             </tr>
           ))}
         </tbody>

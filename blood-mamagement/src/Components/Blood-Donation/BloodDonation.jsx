@@ -4,12 +4,15 @@ import axios from 'axios';
 import './BloodDonation.css';
 
 function BloodDonation() {
+  // const userId = localStorage.getItem('user1');
+  // const id = userId ? userId.split(':')[0] : '';
   const [formData, setFormData] = useState({
     name: '',
     age: '',
     bloodGroup: '',
     unit: '',
     disease: ''
+    // userId: id
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -19,13 +22,15 @@ function BloodDonation() {
     setFormData({ ...formData, [id]: value });
   };
 
+  const handleBloodGroupChange = (e) => {
+    const { value } = e.target;
+    setFormData({ ...formData, bloodGroup: value });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Clear previous errors and success message
     setErrors({});
     setSuccessMessage('');
-    // const userId = localStorage.getItem('user1')._id;
-    // Check for empty fields
     const validationErrors = {};
     for (const key in formData) {
       if (!formData[key]) {
@@ -35,28 +40,27 @@ function BloodDonation() {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Assuming you have an API endpoint for blood donation
+      // Log the formData to check if bloodGroup value is correct
+      console.log('Form Data:', formData);
       axios.post('http://localhost:3100/blood-donation', formData)
         .then(response => {
-          // Handle response
           console.log(response);
-          // Show success message
           setSuccessMessage('Donation successful!');
-          // Clear form data after successful submission
           setFormData({
             name: '',
             age: '',
             bloodGroup: '',
             unit: '',
             disease: ''
+            // userId: id
           });
         })
         .catch(error => {
-          // Handle error
           console.error('Error:', error);
         });
     }
   };
+  
 
   return (
     <div>
@@ -77,7 +81,7 @@ function BloodDonation() {
           <div className="form-group">
             <label htmlFor="bloodGroup">Blood Group:</label>
             <br />
-            <select id="bloodGroup" className='blood-donation' value={formData.bloodGroup} onChange={handleChange}>
+            <select id="bloodGroup" className='blood-donation' value={formData.bloodGroup} onChange={handleBloodGroupChange}>
               <option value="">Select Blood Group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>

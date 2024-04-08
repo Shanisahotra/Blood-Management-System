@@ -1,3 +1,4 @@
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Signup from './Components/Signup';
@@ -12,13 +13,13 @@ function App() {
     <Router>
       <Navbar />
       <Routes>
-      <Route path="/" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
         {/* Render both Sidebar and HomeSidebar on the /home route */}
         <Route path="/home" element={<HomeLayout />} />
+        <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/blood-donation" element={<BloodDonation />} />
-      
       </Routes>
     </Router>
   );

@@ -59,6 +59,35 @@ app.delete('/donors/:id', async (req, resp) => {
      resp.status(500).send(error);
    }
  });
+
+app.get('/Donors/:id', async (req, resp) => {
+  try {
+    let result = await Blood.findOne({ _id: req.params.id });
+    if (result) {
+      resp.send(result);
+    } else {
+      resp.status(404).send("No record found");
+    }
+  } catch (error) {
+    resp.status(500).send("Internal Server Error");
+  }
+});
+
+
+app.put('/Donors-update/:id', async (req, resp) => {
+  try {
+    const result = await Blood.updateOne(
+      { _id: req.params.id },
+      { $set: req.body }
+    );
+    resp.send(result);
+  } catch (error) {
+    console.error('Error updating donor:', error);
+    resp.status(500).send('Internal server error');
+  }
+});
+
+
  
 app.listen(3100);
 

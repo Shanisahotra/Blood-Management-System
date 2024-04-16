@@ -43,7 +43,7 @@ function BloodDonation() {
     } else {
       // Log the formData to check if bloodGroup value is correct
       console.log('Form Data:', formData);
-      axios.post('http://localhost:3100/blood-donation', formData)
+      axios.post('http://localhost:3000/blood-donation', formData)
         .then(response => {
           console.log(response);
           setSuccessMessage('Donation successful!');

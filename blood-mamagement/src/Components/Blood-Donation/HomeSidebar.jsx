@@ -8,7 +8,7 @@ const HomeSidebar = () => {
 
   useEffect(() => {
     // Fetch donor data from the backend API
-    axios.get('http://localhost:3100/donor')
+    axios.get('http://localhost:3000/donor')
       .then(response => {
         // Check if response data is an array
         if (Array.isArray(response.data)) {
@@ -27,11 +27,34 @@ const HomeSidebar = () => {
   const handleDelete = async (id) => {
     try {
       // Send delete request to the backend API
-      await axios.delete(`http://localhost:3100/donors/${id}`);
+      await axios.delete(`http://localhost:3000/donors/${id}`);
       // Update the state to remove the deleted donor
       setDonors(donors.filter(donor => donor._id !== id));
     } catch (error) {
       console.error('Error deleting donor:', error);
+    }
+  };
+
+  //Export to Excel
+  const handleExport = async () => {
+    try {
+      // Send request to server to export data
+      const response = await axios.get('http://localhost:3000/export', {
+        responseType: 'blob' // Important: responseType must be 'blob' to handle binary data (Excel file)
+      });
+
+      // Create object URL for downloading the Excel file
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'data.xlsx');
+      document.body.appendChild(link);
+      link.click();
+
+      // Clean up object URL after download
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error exporting data:', error);
     }
   };
 
@@ -66,7 +89,9 @@ const HomeSidebar = () => {
             </tr>
           ))}
         </tbody>
+        <button onClick={handleExport}>Export to Excel</button>
       </table>
+      
     </div>
   );
 };

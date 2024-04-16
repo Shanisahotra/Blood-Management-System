@@ -4,6 +4,8 @@ require('./db/config');
 const User = require("./db/Users");
 const Blood = require("./db/Blood-Donation");
 const app = express();
+const exceljs = require('exceljs');
+
 
 app.use(express.json());
 app.use(cors());
@@ -88,6 +90,36 @@ app.put('/Donors-update/:id', async (req, resp) => {
 });
 
 
+app.get('/export', async (req, res) => {
+  try {
+    // Retrieve data from MongoDB
+    const result = await Blood.find();
+
+    // Format data (example: convert to array of arrays)
+    const formattedData = result.map(item => [item.name, item.age, item.bloodGroup, item.unit, item.disease]);
+
+    // Generate Excel workbook
+    const workbook = new exceljs.Workbook();
+    const worksheet = workbook.addWorksheet('Data');
+
+    // Add data to worksheet
+    worksheet.addRows(formattedData);
+
+    // Set response headers
+    res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    res.setHeader('Content-Disposition', 'attachment; filename="data.xlsx"');
+
+    // Send Excel file as response
+    await workbook.xlsx.write(res);
+    res.end();
+
+    console.log("Execel file is working")
+  } catch (error) {
+    console.error('Error exporting data:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
  
-app.listen(3100);
+app.listen(3000);
 

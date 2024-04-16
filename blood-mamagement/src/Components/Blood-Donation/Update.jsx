@@ -17,7 +17,7 @@ const Update = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`http://localhost:3100/Donors/${params.id}`);
+        const response = await axios.get(`http://localhost:3000/Donors/${params.id}`);
         setFormData(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -35,7 +35,7 @@ const Update = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.put(`http://localhost:3100/Donors-update/${params.id}`, formData);
+      await axios.put(`http://localhost:3000/Donors-update/${params.id}`, formData);
       console.log('Data updated successfully');
       // Navigate to HomeSidebar component after updating the data
       navigate('/home');

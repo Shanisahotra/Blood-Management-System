@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
-import { Link } from 'react-router-dom'; // Add this line
 import axios from 'axios';
 import './BloodDonation.css';
 
 function BloodDonation() {
-  // const userId = localStorage.getItem('user1');
-  // const id = userId ? userId.split(':')[0] : '';
   const [formData, setFormData] = useState({
     name: '',
+    email:'',
     age: '',
     bloodGroup: '',
     unit: '',
     disease: ''
-    // userId: id
   });
   const [errors, setErrors] = useState({});
   const [successMessage, setSuccessMessage] = useState('');
@@ -38,22 +35,23 @@ function BloodDonation() {
         validationErrors[key] = 'This field is required.';
       }
     }
+    if (!formData.email.includes('@')) {
+      validationErrors.email = 'Invalid email format.';
+    }
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
     } else {
-      // Log the formData to check if bloodGroup value is correct
-      console.log('Form Data:', formData);
-      axios.post('http://localhost:3000/blood-donation', formData)
+      axios.post('http://localhost:3100/blood-donation', formData)
         .then(response => {
           console.log(response);
           setSuccessMessage('Donation successful!');
           setFormData({
             name: '',
+            email: '',
             age: '',
             bloodGroup: '',
             unit: '',
             disease: ''
-            // userId: id
           });
         })
         .catch(error => {
@@ -61,7 +59,6 @@ function BloodDonation() {
         });
     }
   };
-  
 
   return (
     <div>
@@ -73,6 +70,11 @@ function BloodDonation() {
             <label htmlFor="name">Name:</label>
             <input className='blood-donation' type="text" id="name" value={formData.name} onChange={handleChange}/>
             {errors.name && <span className="error">{errors.name}</span>}
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email:</label>
+            <input className='blood-donation' type="text" id="email" value={formData.email} onChange={handleChange}/>
+            {errors.email && <span className="error">{errors.email}</span>}
           </div>
           <div className="form-group">
             <label htmlFor="age">Age:</label>

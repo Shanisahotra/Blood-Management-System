@@ -5,7 +5,8 @@ const User = require("./db/Users");
 const Blood = require("./db/Blood-Donation");
 const app = express();
 const exceljs = require('exceljs');
-
+const XLSX = require('xlsx');
+const nodemailer = require('nodemailer');
 
 app.use(express.json());
 app.use(cors());
@@ -95,8 +96,12 @@ app.get('/export', async (req, res) => {
     // Retrieve data from MongoDB
     const result = await Blood.find();
 
+    
     // Format data (example: convert to array of arrays)
-    const formattedData = result.map(item => [item.name, item.age, item.bloodGroup, item.unit, item.disease]);
+    const formattedData = [
+      ['Name', 'Email', 'Age', 'Blood Group', 'Unit', 'Disease'], // Add headings as the first element
+      ...result.map(item => [item.name, item.age, item.bloodGroup, item.unit, item.disease])
+    ];
 
     // Generate Excel workbook
     const workbook = new exceljs.Workbook();
@@ -120,6 +125,36 @@ app.get('/export', async (req, res) => {
   }
 });
 
+
+app.post('/blood-donation', async (req, res) => {
+  try {
+    const { name, email } = req.body;
+    
+    // Configure Nodemailer transporter
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com', // Gmail SMTP host
+      port: 587, // Gmail SMTP port
+      secure: false, // false for other ports
+      auth: {
+        user: 'jonathanzeeshan25@gmail.com', // Your Gmail address
+        pass: 'Jonathan123@', // Your Gmail password
+      },
+    });
+
+    // Send confirmation email
+    await transporter.sendMail({
+      from: 'jonathanzeeshan25@gmail.com', // Sender address (your Gmail address)
+      to: email, // Recipient address (donor's email)
+      subject: 'Confirmation of Blood Donation',
+      text: `Dear ${name},\n\nThank you for your blood donation. Your contribution is greatly appreciated.\n\nSincerely,\nThe Blood Donation Team`,
+    });
+
+    res.status(200).json({ message: 'Donation successful' });
+  } catch (error) {
+    console.error('Error adding blood donation:', error);
+    res.status(500).send('Internal Server Error');
+  }
+});
  
-app.listen(3000);
+app.listen(3100);
 

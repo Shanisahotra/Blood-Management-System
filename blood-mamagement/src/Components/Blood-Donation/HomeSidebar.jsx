@@ -8,7 +8,7 @@ const HomeSidebar = () => {
 
   useEffect(() => {
     // Fetch donor data from the backend API
-    axios.get('http://localhost:3000/donor')
+    axios.get('http://localhost:3100/donor')
       .then(response => {
         // Check if response data is an array
         if (Array.isArray(response.data)) {
@@ -27,7 +27,7 @@ const HomeSidebar = () => {
   const handleDelete = async (id) => {
     try {
       // Send delete request to the backend API
-      await axios.delete(`http://localhost:3000/donors/${id}`);
+      await axios.delete(`http://localhost:3100/donors/${id}`);
       // Update the state to remove the deleted donor
       setDonors(donors.filter(donor => donor._id !== id));
     } catch (error) {
@@ -39,7 +39,7 @@ const HomeSidebar = () => {
   const handleExport = async () => {
     try {
       // Send request to server to export data
-      const response = await axios.get('http://localhost:3000/export', {
+      const response = await axios.get('http://localhost:3100/export', {
         responseType: 'blob' // Important: responseType must be 'blob' to handle binary data (Excel file)
       });
 
@@ -66,6 +66,7 @@ const HomeSidebar = () => {
           <tr>
             <th>S. No.</th>
             <th>Name</th>
+            <th>Email</th> {/* Add email field */}
             <th>Age</th>
             <th>Blood Group</th>
             <th>Unit</th>
@@ -78,6 +79,7 @@ const HomeSidebar = () => {
             <tr key={donor._id}>
               <td>{index + 1}</td>
               <td>{donor.name}</td>
+              <td>{donor.email}</td> {/* Display email field */}
               <td>{donor.age}</td>
               <td>{donor.bloodGroup}</td>
               <td>{donor.unit}</td>

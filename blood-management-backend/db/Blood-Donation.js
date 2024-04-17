@@ -2,8 +2,9 @@ const mongoose = require('mongoose');
 
 const BloodSchema = new mongoose.Schema({
     name: String,
+    email: String, 
     age: String,
-    bloodGroup: String, // Corrected field name
+    bloodGroup: String,
     unit: String,
     disease: String,
     userId: String

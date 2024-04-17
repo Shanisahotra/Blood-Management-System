@@ -132,11 +132,11 @@ app.post('/blood-donation', async (req, res) => {
     
     // Configure Nodemailer transporter
     const transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com', // Gmail SMTP host
+          host: 'smtp.ethereal.email',
       port: 587, // Gmail SMTP port
       secure: false, // false for other ports
       auth: {
-        user: 'jonathanzeeshan25@gmail.com', // Your Gmail address
+        user: '	jonathanzeeshan25@gmail.com', // Your Gmail address
         pass: 'Jonathan123@', // Your Gmail password
       },
     });

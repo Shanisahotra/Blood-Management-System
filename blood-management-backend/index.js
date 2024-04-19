@@ -152,6 +152,24 @@ app.get('/export', async (req, res) => {
   }
 });
 
+
+app.get("/search/:key", async (req, resp) => {
+  try {
+    let result = await Blood.find({
+      "$or": [
+        { name: { $regex: req.params.key } },
+        { age: { $regex: req.params.key } },
+        { bloodGroup: { $regex: req.params.key } }
+      ]
+    });
+    resp.send(result);
+  } catch (error) {
+    console.error('Error searching blood donations:', error);
+    resp.status(500).send('Internal Server Error');
+  }
+});
+
+
 app.post('/blood-donation', async (req, res) => {
 
     const { name, email } = req.body;

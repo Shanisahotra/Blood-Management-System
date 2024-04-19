@@ -5,13 +5,16 @@ const User = require("./db/Users");
 const Blood = require("./db/Blood-Donation");
 const app = express();
 const exceljs = require('exceljs');
-// const XLSX = require('xlsx');
+const xlsx = require('xlsx');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+
 
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
+app.use(fileUpload());
 
 app.post("/register", async(req,resp)=>{
    let user = new User(req.body);
@@ -41,6 +44,28 @@ app.post('/blood-donation', async(req,resp)=>{
    let result = await blood.save();
    resp.send(result);
 })
+
+// //import excel file
+// app.post('/blood-donation', (req, res) => {
+//   if (!req.files || Object.keys(req.files).length === 0) {
+//     return res.status(400).send('No files were uploaded.');
+//   }
+
+//   const excelFile = req.files.file;
+
+//   const workbook = xlsx.read(excelFile.data, { type: 'buffer' });
+//   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+//   // Process the worksheet data as needed
+//   // Example: Extract data from Excel and save to database
+
+//   // For demonstration purposes, let's log the extracted data
+//   const data = xlsx.utils.sheet_to_json(worksheet, { raw: true });
+//   console.log(data);
+
+//   res.status(200).json({ message: 'Excel file processed successfully' });
+// });
+
 
 app.get('/donor', async(req,resp)=>{
    try {
@@ -128,36 +153,38 @@ app.get('/export', async (req, res) => {
 });
 
 app.post('/blood-donation', async (req, res) => {
-  try {
+
     const { name, email } = req.body;
     
-    // Configure Nodemailer transporter
-    const transporter = nodemailer.createTransport({
-          host: 'smtp.gmail.com',
-      port: 587, // Gmail SMTP port
-      secure: false, // false for other ports
-      auth: {
-        user: '	jonathanzeeshan25@gmail.com', // Your Gmail address
-        pass: 'gjaz xwau otio kxgw', // Your Gmail password
-      },
-    });
-
-    // Send confirmation email
-    await transporter.sendMail({
-      from: 'jonathanzeeshan25@gmail.com', // Sender address (your Gmail address)
-      to: email, // Recipient address (donor's email)
-      subject: 'Confirmation of Blood Donation',
-      text: `Dear ${name},\n\nThank you for your blood donation. Your contribution is greatly appreciated.\n\nSincerely,\nThe Blood Donation Team`,
-    });
-     console.log('Email is working');
-    res.status(200).json({ message: 'Donation successful' });
-  } catch (error) {
-    console.error('Error adding blood donation:', error);
-    res.status(500).send('Internal Server Error');
-  }
+   
+const transporter = nodemailer.createTransport({
+  host: "smtp.gmail.com",
+  port: 587,
+  secure: false, // Use `true` for port 465, `false` for all other ports
+  auth: {
+    user: "jonathanzeeshan25@gmail.com",
+    pass: "gjaz xwau otio kxgw",
+  },
 });
 
-  
+// async..await is not allowed in global scope, must use a wrapper
+async function main() {
+  // send mail with defined transport object
+  const info = await transporter.sendMail({
+    from: 'jonathanzeeshan25@gmail.com', // sender address
+    to: email, // list of receivers
+    subject: "Confirmation of Blood Donation✔", // Subject line
+    text: "Hello world?", // plain text body
+    html: "<b>Hello world?</b>", // html body
+  });
+
+  console.log("Message sent: %s", info.messageId);
+  // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
+}
+
+main().catch(console.error);
+
+})
 
  
 app.listen(3100);

@@ -8,30 +8,34 @@ import Sidebar from './Components/Sidebar';
 import BloodDonation from './Components/Blood-Donation/BloodDonation';
 import HomeSidebar from './Components/Blood-Donation/HomeSidebar';
 import Update from './Components/Blood-Donation/Update';
+import Homepage from './Components/Blood-Donation/Homepage';
 
 function App() {
   return (
     <Router>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/register" element={<Signup />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomeLayout />} />
-        <Route path="/sidebar" element={<Sidebar />} />
-        <Route path="/blood-donation" element={<BloodDonation />} />
-        <Route path="/update/:id" element={<Update />} /> {/* Route for update component */}
-      </Routes>
+      <div>
+        <Navbar />
+        <div className="container">
+          <Sidebar />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/register" element={<Signup />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/home/*" element={<HomeLayout />} />
+            <Route path="/blood-donation" element={<BloodDonation />} />
+            <Route path="/update/:id" element={<Update />} />
+            <Route path="/homepage" element={<Homepage />} />
+          </Routes>
+        </div>
+      </div>
     </Router>
   );
 }
 
 const HomeLayout = () => {
   return (
-    <div>
-      <Sidebar />
+    <div className="content">
       <HomeSidebar />
-      
     </div>
   );
 };

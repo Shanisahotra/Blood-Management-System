@@ -12,23 +12,20 @@ const HomeSidebar = () => {
     // Fetch donor data from the backend API
     axios.get('http://localhost:3100/donor')
       .then(response => {
-        // Check if response data is an array
         if (Array.isArray(response.data)) {
-          // Set the donor data in state
           setDonors(response.data);
           setSearchResults(response.data);
         } else {
-          // If response data is not an array, log an error
           console.error('Error: Expected array, received', typeof response.data);
         }
       })
       .catch(error => {
         console.error('Error fetching donor data:', error);
       });
-  }, []); // Run once when component mounts
+  }, []);
 
-  // Filter donors based on search term
   useEffect(() => {
+    // Filter donors based on search term whenever searchTerm changes
     const filteredDonors = donors.filter(donor =>
       donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       donor.age.toString().includes(searchTerm.toLowerCase()) ||
@@ -39,9 +36,7 @@ const HomeSidebar = () => {
 
   const handleDelete = async (id) => {
     try {
-      // Send delete request to the backend API
       await axios.delete(`http://localhost:3100/donors/${id}`);
-      // Update the state to remove the deleted donor
       setDonors(donors.filter(donor => donor._id !== id));
       setSearchResults(searchResults.filter(donor => donor._id !== id));
     } catch (error) {
@@ -51,12 +46,10 @@ const HomeSidebar = () => {
 
   const handleExport = async () => {
     try {
-      // Send request to server to export data
       const response = await axios.get('http://localhost:3100/export', {
-        responseType: 'blob' // Important: responseType must be 'blob' to handle binary data (Excel file)
+        responseType: 'blob'
       });
 
-      // Create object URL for downloading the Excel file
       const url = window.URL.createObjectURL(new Blob([response.data]));
       const link = document.createElement('a');
       link.href = url;
@@ -64,7 +57,6 @@ const HomeSidebar = () => {
       document.body.appendChild(link);
       link.click();
 
-      // Clean up object URL after download
       window.URL.revokeObjectURL(url);
     } catch (error) {
       console.error('Error exporting data:', error);
@@ -73,14 +65,15 @@ const HomeSidebar = () => {
 
   return (
     <div>
-      <input 
+      <table>
+        <thead>
+        <input 
         type="text" 
         placeholder="Search by Name, Age, or Blood Group" 
         value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} className='serach-input'
+        onChange={(e) => setSearchTerm(e.target.value)} 
+        className='search-input'
       />
-      <table>
-        <thead>
           <h1>Donors</h1>
           <tr>
             <th>S. No.</th>
@@ -110,8 +103,9 @@ const HomeSidebar = () => {
             </tr>
           ))}
         </tbody>
+        <button onClick={handleExport}>Export to Excel</button>
       </table>
-      <button onClick={handleExport}>Export to Excel</button>
+   
     </div>
   );
 };

@@ -7,8 +7,14 @@ import { BiDonateHeart } from "react-icons/bi";
 
 const Sidebar = () => {
   return (
-    <div className="sidebar">
+    <div className="sidebar"> 
       <ul className="sidebar-menu">
+      <li>
+          <Link to='/homepage' >
+            <FaHome className="sidebar-Icon" />
+            <span className="sidebar-text">Home-Page</span>
+          </Link>
+        </li>
         <li>
           <Link to='/home' >
             <FaHome className="sidebar-Icon" />

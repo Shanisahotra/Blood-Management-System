@@ -10,6 +10,7 @@ import HomeSidebar from './Components/Blood-Donation/HomeSidebar';
 import Update from './Components/Blood-Donation/Update';
 import Homepage from './Components/Blood-Donation/Homepage';
 
+
 function App() {
   return (
     <Router>
@@ -21,6 +22,7 @@ function App() {
         <Route path="/home" element={<HomeLayout />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/homepage" element={<Homepage />} />
+        
         <Route path="/blood-donation" element={<BloodDonation />} />
         <Route path="/update/:id" element={<Update />} /> {/* Route for update component */}
       </Routes>

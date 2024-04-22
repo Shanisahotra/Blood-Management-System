@@ -28,7 +28,7 @@ const Sidebar = () => {
           </Link>
         </li>
         <li><Link to=''><BiDonateHeart className="sidebar-Icon"/>
-            <span className="sidebar-text">Donations</span> </Link>
+            <span className="sidebar-text">UploadForm</span> </Link>
         </li>
         <li><Link to=''><BiDonateHeart className="sidebar-Icon"/>
             <span className="sidebar-text">Donations</span> </Link>

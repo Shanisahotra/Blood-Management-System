@@ -9,12 +9,15 @@ const xlsx = require('xlsx');
 const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
+const multer = require('multer');
 
 
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
+const upload = multer({ dest: 'uploads/' });
+
 
 app.post("/register", async(req,resp)=>{
    let user = new User(req.body);
@@ -168,6 +171,28 @@ app.get("/search/:key", async (req, resp) => {
     resp.status(500).send('Internal Server Error');
   }
 });
+
+
+
+// Endpoint for uploading Excel file
+app.post('/blood-donation', upload.single('file'), (req, res) => {
+  // Parse the uploaded Excel file
+  const workbook = xlsx.readFile(req.file.path);
+  const sheet = workbook.Sheets[workbook.SheetNames[0]];
+  const data = xlsx.utils.sheet_to_json(sheet);
+
+  // Process the data and save it to MongoDB
+  User.insertMany(data)
+    .then(() => {
+      res.status(200).send('Data uploaded successfully');
+    })
+    .catch(error => {
+      res.status(500).send('Error uploading data: ' + error.message);
+    });
+});
+
+
+
 
 
 app.post('/blood-donation', async (req, res) => {

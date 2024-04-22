@@ -1,12 +1,15 @@
 .homepage-container {
-    position: absolute;
-    top: 10px; /* Adjust this value based on the height of your navbar */
-    left: 0;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 60px); /* Adjusted height to accommodate navbar */
+    height: 60vh;
+    width: 60%;
+    margin: auto;
+    position: absolute;
+    top: 180px;
+    left: 25%;
+    /* background-color: #b63737; */
+    border: 1px solid red;
   }
   
   .homepage-content {
@@ -18,15 +21,18 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    
+
   }
   
   .blood-group-card {
-    background-color: #e0dede;
+    background-color: #f0f0f0;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     width: 200px;
     text-align: center;
+    border: 1px solid red;
   }
   
   .blood-group-card h2 {

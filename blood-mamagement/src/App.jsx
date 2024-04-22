@@ -13,29 +13,31 @@ import Homepage from './Components/Blood-Donation/Homepage';
 function App() {
   return (
     <Router>
-      <div>
-        <Navbar />
-        <div className="container">
-          <Sidebar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/register" element={<Signup />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/home/*" element={<HomeLayout />} />
-            <Route path="/blood-donation" element={<BloodDonation />} />
-            <Route path="/update/:id" element={<Update />} />
-            <Route path="/homepage" element={<Homepage />} />
-          </Routes>
-        </div>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/register" element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<HomeLayout />} />
+        <Route path="/sidebar" element={<Sidebar />} />
+        <Route path="/homepage" element={<Homepage />} />
+        <Route path="/blood-donation" element={<BloodDonation />} />
+        <Route path="/update/:id" element={<Update />} /> {/* Route for update component */}
+      </Routes>
     </Router>
   );
 }
 
 const HomeLayout = () => {
   return (
-    <div className="content">
-      <HomeSidebar />
+    <div>
+      <Sidebar />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<HomeSidebar />} />
+          <Route path="/homepage" element={<Homepage />} />
+        </Routes>
+      </div>
     </div>
   );
 };

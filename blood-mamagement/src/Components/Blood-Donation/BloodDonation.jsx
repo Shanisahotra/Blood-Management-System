@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../Sidebar';
 import axios from 'axios';
 import './BloodDonation.css';
-
+import HomeSidebar from './HomeSidebar';
 function BloodDonation() {
   const [formData, setFormData] = useState({
     name: '',
@@ -108,6 +108,7 @@ function BloodDonation() {
             {errors.disease && <span className="error">{errors.disease}</span>}
           </div>
           <button type="submit" className="login-button1">Donate</button>
+        
           <br />
           {successMessage && <div className="success">{successMessage}</div>}
         </form>

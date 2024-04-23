@@ -6,9 +6,9 @@ import Login from './Components/Login';
 import Home from './Components/Home';
 import Sidebar from './Components/Sidebar';
 import BloodDonation from './Components/Blood-Donation/BloodDonation';
-import HomeSidebar from './Components/Blood-Donation/HomeSidebar';
 import Update from './Components/Blood-Donation/Update';
 import Homepage from './Components/Blood-Donation/Homepage';
+import HomeSidebar from './Components/Blood-Donation/HomeSidebar';
 
 
 function App() {
@@ -19,10 +19,10 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/register" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<HomeLayout />} />
+       
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/homepage" element={<Homepage />} />
-        
+        <Route path="/home" element={<HomeSidebar />} />
         <Route path="/blood-donation" element={<BloodDonation />} />
         <Route path="/update/:id" element={<Update />} /> {/* Route for update component */}
       </Routes>
@@ -36,7 +36,7 @@ const HomeLayout = () => {
       <Sidebar />
       <div className="main-content">
         <Routes>
-          <Route path="/" element={<HomeSidebar />} />
+        
           <Route path="/homepage" element={<Homepage />} />
         </Routes>
       </div>

@@ -15,12 +15,14 @@ const Sidebar = () => {
             <span className="sidebar-text">Home-Page</span>
           </Link>
         </li>
+
         <li>
           <Link to='/home' >
             <FaHome className="sidebar-Icon" />
             <span className="sidebar-text">Home</span>
           </Link>
         </li>
+  
         <li>
           <Link to='/blood-donation'>
             <BiSolidDonateBlood className="sidebar-Icon"/>

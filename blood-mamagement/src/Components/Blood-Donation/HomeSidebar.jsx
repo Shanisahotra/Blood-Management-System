@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './HomeSidebar.css';
+import { Link } from 'react-router-dom';
 
 const HomeSidebar = () => {
   const [donors, setDonors] = useState([]);
@@ -24,16 +24,6 @@ const HomeSidebar = () => {
       });
   }, []);
 
-  useEffect(() => {
-    // Filter donors based on search term whenever searchTerm changes
-    const filteredDonors = donors.filter(donor =>
-      donor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      donor.age.toString().includes(searchTerm.toLowerCase()) ||
-      donor.bloodGroup.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-    setSearchResults(filteredDonors);
-  }, [searchTerm, donors]);
-
   const handleDelete = async (id) => {
     try {
       await axios.delete(`http://localhost:3100/donors/${id}`);
@@ -42,6 +32,21 @@ const HomeSidebar = () => {
     } catch (error) {
       console.error('Error deleting donor:', error);
     }
+  };
+
+  const handleSearch = async (term) => {
+    try {
+      const response = await axios.get(`http://localhost:3100/search?q=${term}`);
+      setSearchResults(response.data);
+    } catch (error) {
+      console.error('Error searching donors:', error);
+    }
+  };
+
+  const handleChange = (event) => {
+    const term = event.target.value;
+    setSearchTerm(term);
+    handleSearch(term); // Call handleSearch with the updated search term
   };
 
   const handleExport = async () => {
@@ -65,47 +70,47 @@ const HomeSidebar = () => {
 
   return (
     <div>
-      <table>
-        <thead>
-        <input 
-        type="text" 
-        placeholder="Search by Name, Age, or Blood Group" 
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)} 
-        className='search-input'
-      />
-          <h1>Donors</h1>
-          <tr>
-            <th>S. No.</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Age</th>
-            <th>Blood Group</th>
-            <th>Unit</th>
-            <th>Disease</th>
-            <th>Operation</th>
-          </tr>
-        </thead>
-        <tbody>
-          {searchResults.map((donor, index) => (
-            <tr key={donor._id}>
-              <td>{index + 1}</td>
-              <td>{donor.name}</td>
-              <td>{donor.email}</td>
-              <td>{donor.age}</td>
-              <td>{donor.bloodGroup}</td>
-              <td>{donor.unit}</td>
-              <td>{donor.disease}</td>
-              <td>
-                <button onClick={() => handleDelete(donor._id)}>Delete</button>
-                <Link to={`/update/${donor._id}`}>Update</Link>
-              </td>
+      <div className="table-container">
+        <input
+          type="text"
+          placeholder="Search by Name, Age, or Blood Group"
+          className="search-input"
+          value={searchTerm}
+          onChange={handleChange}
+        />
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Age</th>
+              <th>Blood Group</th>
+              <th>Unit</th>
+              <th>Disease</th>
+              <th>Operation</th>
             </tr>
-          ))}
-        </tbody>
+          </thead>
+          <tbody>
+            {searchResults.map((donor, index) => (
+              <tr key={donor._id}>
+                <td>{index + 1}</td>
+                <td>{donor.name}</td>
+                <td>{donor.email}</td>
+                <td>{donor.age}</td>
+                <td>{donor.bloodGroup}</td>
+                <td>{donor.unit}</td>
+                <td>{donor.disease}</td>
+                <td>
+                  <button className="operation-btn" onClick={() => handleDelete(donor._id)}>Delete</button>
+                  <div className="operation-btn"><Link to={`/update/${donor._id}`}>Update</Link></div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
         <button onClick={handleExport}>Export to Excel</button>
-      </table>
-   
+      </div>
     </div>
   );
 };

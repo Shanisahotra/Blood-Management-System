@@ -71,6 +71,9 @@ const HomeSidebar = () => {
   return (
     <div>
       <div className="table-container">
+      <Link to='/sidebar'>Back</Link>
+      <br />
+      <br />
         <input
           type="text"
           placeholder="Search by Name, Age, or Blood Group"
@@ -80,6 +83,7 @@ const HomeSidebar = () => {
         />
         <table className="data-table">
           <thead>
+          <h1>Donors</h1>
             <tr>
               <th>S. No.</th>
               <th>Name</th>
@@ -110,6 +114,8 @@ const HomeSidebar = () => {
           </tbody>
         </table>
         <button onClick={handleExport}>Export to Excel</button>
+       
+        
       </div>
     </div>
   );

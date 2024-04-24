@@ -3,6 +3,7 @@ import Sidebar from '../Sidebar';
 import axios from 'axios';
 import './BloodDonation.css';
 import HomeSidebar from './HomeSidebar';
+import UploadForm from './UploadForm';
 function BloodDonation() {
   const [formData, setFormData] = useState({
     name: '',
@@ -112,6 +113,7 @@ function BloodDonation() {
           <br />
           {successMessage && <div className="success">{successMessage}</div>}
         </form>
+        <UploadForm/>
       </div>
     </div>
   );

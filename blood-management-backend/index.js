@@ -10,13 +10,33 @@ const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const multer = require('multer');
+// const YourModel = require('../blood-management-backend/db/Blood-Donation'); // Import your Mongoose model
 
 
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
-const upload = multer({ dest: 'uploads/' });
+
+const storage = multer.diskStorage({
+  destination: (req,file,cb)=>{
+    cb(null, "./uploads");
+  },
+
+  filename: (req,file, cb)=>{
+    cb(null, file.originalname);
+  }
+})
+
+const upload = multer({
+  storage,
+});
+
+app.post("/uploadAll", upload.single("csvFile"), async (req,resp)=>{
+  const jsonArray = await csv().fromFile(req.file.path);
+  resp.json(jsonArray);
+  resp.send('ok');
+})
 
 
 app.post("/register", async(req,resp)=>{
@@ -48,26 +68,6 @@ app.post('/blood-donation', async(req,resp)=>{
    resp.send(result);
 })
 
-// //import excel file
-// app.post('/blood-donation', (req, res) => {
-//   if (!req.files || Object.keys(req.files).length === 0) {
-//     return res.status(400).send('No files were uploaded.');
-//   }
-
-//   const excelFile = req.files.file;
-
-//   const workbook = xlsx.read(excelFile.data, { type: 'buffer' });
-//   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-//   // Process the worksheet data as needed
-//   // Example: Extract data from Excel and save to database
-
-//   // For demonstration purposes, let's log the extracted data
-//   const data = xlsx.utils.sheet_to_json(worksheet, { raw: true });
-//   console.log(data);
-
-//   res.status(200).json({ message: 'Excel file processed successfully' });
-// });
 
 
 app.get('/donor', async(req,resp)=>{
@@ -174,60 +174,6 @@ app.get("/search/:key", async (req, resp) => {
 
 
 
-// Endpoint for uploading Excel file
-app.post('/blood-donation', upload.single('file'), (req, res) => {
-  // Parse the uploaded Excel file
-  const workbook = xlsx.readFile(req.file.path);
-  const sheet = workbook.Sheets[workbook.SheetNames[0]];
-  const data = xlsx.utils.sheet_to_json(sheet);
-
-  // Process the data and save it to MongoDB
-  User.insertMany(data)
-    .then(() => {
-      res.status(200).send('Data uploaded successfully');
-    })
-    .catch(error => {
-      res.status(500).send('Error uploading data: ' + error.message);
-    });
-});
-
-
-
-
-
-app.post('/blood-donation', async (req, res) => {
-
-    const { name, email } = req.body;
-    
-   
-const transporter = nodemailer.createTransport({
-  host: "smtp.gmail.com",
-  port: 587,
-  secure: false, // Use `true` for port 465, `false` for all other ports
-  auth: {
-    user: "jonathanzeeshan25@gmail.com",
-    pass: "gjaz xwau otio kxgw",
-  },
-});
-
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-  // send mail with defined transport object
-  const info = await transporter.sendMail({
-    from: 'jonathanzeeshan25@gmail.com', // sender address
-    to: email, // list of receivers
-    subject: "Confirmation of Blood Donation✔", // Subject line
-    text: "Hello world?", // plain text body
-    html: "<b>Hello world?</b>", // html body
-  });
-
-  console.log("Message sent: %s", info.messageId);
-  // Message sent: <d786aa62-4e0a-070a-47ed-0b0666549519@ethereal.email>
-}
-
-main().catch(console.error);
-
-})
 
  
 app.listen(3100);

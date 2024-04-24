@@ -7,6 +7,7 @@ const HomeSidebar = () => {
   const [donors, setDonors] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     // Fetch donor data from the backend API
@@ -16,11 +17,11 @@ const HomeSidebar = () => {
           setDonors(response.data);
           setSearchResults(response.data);
         } else {
-          console.error('Error: Expected array, received', typeof response.data);
+          setError('Error: Expected array, received ' + typeof response.data);
         }
       })
       .catch(error => {
-        console.error('Error fetching donor data:', error);
+        setError('Error fetching donor data: ' + error.message);
       });
   }, []);
 
@@ -30,7 +31,7 @@ const HomeSidebar = () => {
       setDonors(donors.filter(donor => donor._id !== id));
       setSearchResults(searchResults.filter(donor => donor._id !== id));
     } catch (error) {
-      console.error('Error deleting donor:', error);
+      setError('Error deleting donor: ' + error.message);
     }
   };
 
@@ -39,7 +40,7 @@ const HomeSidebar = () => {
       const response = await axios.get(`http://localhost:3100/search?q=${term}`);
       setSearchResults(response.data);
     } catch (error) {
-      console.error('Error searching donors:', error);
+      setError('Error searching donors: ' + error.message);
     }
   };
 
@@ -64,7 +65,7 @@ const HomeSidebar = () => {
 
       window.URL.revokeObjectURL(url);
     } catch (error) {
-      console.error('Error exporting data:', error);
+      setError('Error exporting data: ' + error.message);
     }
   };
 
@@ -81,6 +82,7 @@ const HomeSidebar = () => {
           value={searchTerm}
           onChange={handleChange}
         />
+        {error && <div className="error">{error}</div>}
         <table className="data-table">
           <thead>
           <h1>Donors</h1>
@@ -114,8 +116,6 @@ const HomeSidebar = () => {
           </tbody>
         </table>
         <button onClick={handleExport}>Export to Excel</button>
-       
-        
       </div>
     </div>
   );

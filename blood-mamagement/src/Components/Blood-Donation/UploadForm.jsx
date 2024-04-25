@@ -15,7 +15,7 @@ const UploadForm = () => {
       const formData = new FormData();
       formData.append('file', file);
 
-      const response = await axios.post('http://localhost:3100/blood-donation', formData, {
+      const response = await axios.post('http://localhost:3100/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

@@ -18,25 +18,27 @@ app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
-const storage = multer.diskStorage({
-  destination: (req,file,cb)=>{
-    cb(null, "./uploads");
-  },
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, './uploads');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, file.originalname);
+//   }
+// });
 
-  filename: (req,file, cb)=>{
-    cb(null, file.originalname);
-  }
-})
+// const upload = multer({ storage: storage });
 
-const upload = multer({
-  storage,
-});
-
-app.post("/uploadAll", upload.single("csvFile"), async (req,resp)=>{
-  const jsonArray = await csv().fromFile(req.file.path);
-  resp.json(jsonArray);
-  resp.send('ok');
-})
+// app.post('/uploadAll', upload.single('csvFile'), (req, res) => {
+//   try {
+//     const workbook = xlsx.readFile(req.file.path);
+//     // Process the Excel file as needed
+//     res.send('File uploaded successfully');
+//   } catch (error) {
+//     console.error('Error uploading file:', error);
+//     res.status(500).send('Error uploading file');
+//   }
+// });
 
 
 app.post("/register", async(req,resp)=>{

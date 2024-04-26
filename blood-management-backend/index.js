@@ -6,39 +6,47 @@ const Blood = require("./db/Blood-Donation");
 const app = express();
 const exceljs = require('exceljs');
 const xlsx = require('xlsx');
-const nodemailer = require('nodemailer');
+// const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const multer = require('multer');
-// const YourModel = require('../blood-management-backend/db/Blood-Donation'); // Import your Mongoose model
+
+// const excelToJson = require("convert-excel-to-json");
+// const fs = require("fs-extra"); 
 
 
 app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({extended:true}))
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => {
-//     cb(null, './uploads');
-//   },
-//   filename: (req, file, cb) => {
-//     cb(null, file.originalname);
-//   }
-// });
+var upload = multer({dest: "uploads/"});
 
-// const upload = multer({ storage: storage });
+app.post('/uploadsAll', upload.single('file'), (req,res)=>{
+  try{
+    if(req.file?.filename == null || req.file?.filename == 'undefined'){
+    res.status(400).json("No File");
+    }else{
+     var filePath = 'uploads/'+ req.file.filename
 
-// app.post('/uploadAll', upload.single('csvFile'), (req, res) => {
-//   try {
-//     const workbook = xlsx.readFile(req.file.path);
-//     // Process the Excel file as needed
-//     res.send('File uploaded successfully');
-//   } catch (error) {
-//     console.error('Error uploading file:', error);
-//     res.status(500).send('Error uploading file');
-//   }
-// });
+     const excelData = excelToJson({
+         sourceFile: filePath,
+         header: {
+          rows: 1,
+         },
+         columnToKey:{
+          "*":"{{columnHeader}}",
+         },
+     });
+     fs.remove(filePath)
+
+     res.status(200).json(excelData)
+    }
+  }catch(error){
+    res.status(500)
+  }
+})
 
 
 app.post("/register", async(req,resp)=>{

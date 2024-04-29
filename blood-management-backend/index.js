@@ -6,47 +6,64 @@ const Blood = require("./db/Blood-Donation");
 const app = express();
 const exceljs = require('exceljs');
 const xlsx = require('xlsx');
-// const nodemailer = require('nodemailer');
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const multer = require('multer');
-
-// const excelToJson = require("convert-excel-to-json");
-// const fs = require("fs-extra"); 
-
+const path = require('path');
+// const { error } = require("console");
+const csv = require('csvtojson');
 
 app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({extended:true}))
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
 
-var upload = multer({dest: "uploads/"});
+// import fs from 'fs';
 
-app.post('/uploadsAll', upload.single('file'), (req,res)=>{
-  try{
-    if(req.file?.filename == null || req.file?.filename == 'undefined'){
-    res.status(400).json("No File");
-    }else{
-     var filePath = 'uploads/'+ req.file.filename
+// app.post('/uploadAll', async(req,resp)=>{
+//     let xlFile = xlsx.readFile("D:\BloodManagement\Blood-Management-System\blood-management-backend\public\data.xlsx");
 
-     const excelData = excelToJson({
-         sourceFile: filePath,
-         header: {
-          rows: 1,
-         },
-         columnToKey:{
-          "*":"{{columnHeader}}",
-         },
-     });
-     fs.remove(filePath)
 
-     res.status(200).json(excelData)
-    }
-  }catch(error){
-    res.status(500)
-  }
-})
+//     let sheet = xlFile.Sheets[xlFile.SheetNames[0]]
+    
+//     let P_JSON = xlsx.utils.sheet_to_json(sheet);
+
+//     await Blood.insertMany(P_JSON).then((result:any)=>{
+//        if(result.length > 0){
+//         resp.send(status: 200, "message")
+//        }
+//     })
+// })
+
+
+// var upload = multer({dest: "uploads/"});
+
+// app.post('/uploadsAll', upload.single('file'), (req,res)=>{
+//   try{
+//     if(req.file?.filename == null || req.file?.filename == 'undefined'){
+//     res.status(400).json("No File");
+//     }else{
+//      var filePath = 'uploads/'+ req.file.filename
+
+//      const excelData = excelToJson({
+//          sourceFile: filePath,
+//          header: {
+//           rows: 1,
+//          },
+//          columnToKey:{
+//           "*":"{{columnHeader}}",
+//          },
+//      });
+//      fs.remove(filePath)
+
+//      res.status(200).json(excelData)
+//     }
+//   }catch(error){
+//     res.status(500)
+//   }
+// })
 
 
 app.post("/register", async(req,resp)=>{

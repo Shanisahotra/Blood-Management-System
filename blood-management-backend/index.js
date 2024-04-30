@@ -10,60 +10,35 @@ const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const multer = require('multer');
 const path = require('path');
-// const { error } = require("console");
-const csv = require('csvtojson');
+
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(path.resolve(__dirname, 'public')));
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
+// const XlsxPopulate = require('xlsx-populate');
 
-// import fs from 'fs';
+// // Multer middleware for handling file uploads
+// const upload = multer({ dest: 'public/' });
 
-// app.post('/uploadAll', async(req,resp)=>{
-//     let xlFile = xlsx.readFile("D:\BloodManagement\Blood-Management-System\blood-management-backend\public\data.xlsx");
+// app.post('/api/upload', upload.single('excelFile'), (req, res) => {
+//   try {
+//     const filePath = req.file.path;
+//     const workbook = xlsx.readFile(filePath);
+//     const sheetName = workbook.SheetNames[0];
+//     const sheet = workbook.Sheets[sheetName];
+//     const data = xlsx.utils.sheet_to_json(sheet, { header: 1 });
 
+//     // Process the data as needed
+//     console.log('Excel data:', data);
 
-//     let sheet = xlFile.Sheets[xlFile.SheetNames[0]]
-    
-//     let P_JSON = xlsx.utils.sheet_to_json(sheet);
-
-//     await Blood.insertMany(P_JSON).then((result:any)=>{
-//        if(result.length > 0){
-//         resp.send(status: 200, "message")
-//        }
-//     })
-// })
-
-
-// var upload = multer({dest: "uploads/"});
-
-// app.post('/uploadsAll', upload.single('file'), (req,res)=>{
-//   try{
-//     if(req.file?.filename == null || req.file?.filename == 'undefined'){
-//     res.status(400).json("No File");
-//     }else{
-//      var filePath = 'uploads/'+ req.file.filename
-
-//      const excelData = excelToJson({
-//          sourceFile: filePath,
-//          header: {
-//           rows: 1,
-//          },
-//          columnToKey:{
-//           "*":"{{columnHeader}}",
-//          },
-//      });
-//      fs.remove(filePath)
-
-//      res.status(200).json(excelData)
-//     }
-//   }catch(error){
-//     res.status(500)
+//     res.send({ message: 'File uploaded and processed successfully.' });
+//   } catch (error) {
+//     console.error('Error processing file:', error);
+//     res.status(500).send({ error: 'Internal server error.' });
 //   }
-// })
+// });
+
 
 
 app.post("/register", async(req,resp)=>{

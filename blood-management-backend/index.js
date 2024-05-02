@@ -16,6 +16,31 @@ app.use(bodyParser.json());
 app.use(express.json());
 app.use(cors());
 app.use(fileUpload());
+
+
+app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.static(path.resolve(__dirname,'public')));
+
+
+var storage = multer.diskStorage({
+  destination:(req,file,cb)=>{
+    cb(null,'./public/uploads')
+  },
+  
+  filename:(req,file,cb)=>{
+    cb(null,file.originalname)
+  }
+});
+
+var upload = multer({storage:storage});
+app.post('/uploadAll', upload.single('file'), async(req,resp)=>{
+     try{
+      resp.send({status:200, success:true, msg:'runnig app'});
+     }catch(error){
+      resp.send({status:400, success:false, msg:error.message});
+     }
+})
+
 // const XlsxPopulate = require('xlsx-populate');
 
 // // Multer middleware for handling file uploads
@@ -173,9 +198,6 @@ app.get("/search/:key", async (req, resp) => {
     resp.status(500).send('Internal Server Error');
   }
 });
-
-
-
 
  
 app.listen(3100);

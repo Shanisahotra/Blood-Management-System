@@ -113,7 +113,7 @@ function BloodDonation() {
           <br />
           {successMessage && <div className="success">{successMessage}</div>}
         </form>
-        <UploadForm/>
+        {/* <UploadForm/> */}
       </div>
     </div>
   );

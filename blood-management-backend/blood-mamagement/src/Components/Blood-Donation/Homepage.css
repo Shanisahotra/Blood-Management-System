@@ -1,0 +1,45 @@
+.homepage-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 60vh;
+    width: 60%;
+    margin: auto;
+    position: absolute;
+    top: 180px;
+    left: 25%;
+    /* background-color: #b63737; */
+    border: 1px solid red;
+  }
+  
+  .homepage-content {
+    text-align: center;
+  }
+  
+  .blood-group-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    
+
+  }
+  
+  .blood-group-card {
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    text-align: center;
+    border: 1px solid red;
+  }
+  
+  .blood-group-card h2 {
+    margin-bottom: 10px;
+  }
+  
+  .blood-group-card p {
+    margin: 0;
+  }
+  

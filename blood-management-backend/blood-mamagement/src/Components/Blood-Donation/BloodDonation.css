@@ -1,0 +1,78 @@
+/* BloodDonation.css */
+
+.BloodDonation {
+    height: 100vh;
+    width: 100%;
+    background-color: red;
+}
+
+.login-form-container {
+    width: 35%;
+    margin: 80px auto; /* Adjust margin to center the form vertically */
+    padding: 20px;
+    border: 1px solid #ec3d3d;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    margin-top: 200px;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+.blood-donation {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.blood-donation1 {
+    width: 108%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+}
+
+.login-button1 {
+    width: 108%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #ec3d3d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add smooth transition */
+}
+
+.login-button1:hover {
+    background-color: #bf3030; /* Darken color on hover */
+}
+
+.error {
+    color: red; /* Set error message color to red */
+    font-size: 14px;
+    margin-top: 5px; /* Adjust margin for error messages */
+}
+
+.success {
+    color: green; /* Set success message color to green */
+    font-size: 14px;
+    margin-top: 5px; /* Adjust margin for success messages */
+}

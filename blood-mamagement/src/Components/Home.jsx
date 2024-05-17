@@ -8,7 +8,8 @@ function Home() {
       {/* Your content goes here */}
     </div>
     <div className='para'>
-       <p>`Opportunities knock the door sometimes so don't let it go and donate blood.`</p>
+       <p>`Opportunities knock the door sometimes so don't let it go and donate blood.
+       Opportunities knock the door sometimes so don't let it go and donate blood.`</p>
     </div>
     <Footer/>
     </div>

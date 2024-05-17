@@ -8,5 +8,5 @@ mongoose.connect("mongodb+srv://Zeeshan:Zeeshan123@cluster0.18gyn2r.mongodb.net/
     console.log('Database connection successful');
 })
 .catch(err => {
-    console.error('Database connection error:', err);
+    console.error('Database c:', err);
 });

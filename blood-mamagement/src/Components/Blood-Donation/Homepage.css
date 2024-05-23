@@ -1,0 +1,45 @@
+.paddingall{
+  padding: 10px 10px 10px 10px;
+  
+}
+
+.pricetitle{
+  font-weight: 600;
+  
+}
+
+.pricesubtitle{
+  font-size: 14px;
+}
+
+.iconstyle{
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.card1, .minicard{
+  background: rgb(195,58,59);
+  background: -moz-linear-gradient(215deg, rgba(195,58,59,1) 0%, rgba(148,20,20,1) 69%);
+  background: -webkit-linear-gradient(215deg, rgba(195,58,59,1) 0%, rgba(148,20,20,1) 69%);
+  background: linear-gradient(215deg, rgba(195,58,59,1) 0%, rgba(148,20,20,1) 69%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c33a3b",endColorstr="#941414",GradientType=1);
+}
+
+.card2{
+  background: rgb(195,58,59);
+  background: -moz-linear-gradient(58deg, rgba(195,58,59,1) 36%, rgba(148,20,20,1) 69%);
+  background: -webkit-linear-gradient(58deg, rgba(195,58,59,1) 36%, rgba(148,20,20,1) 69%);
+  background: linear-gradient(58deg, rgba(195,58,59,1) 36%, rgba(148,20,20,1) 69%);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#c33a3b",endColorstr="#941414",GradientType=1);
+
+}
+
+.bghome{
+  background: rgb(247,241,241);
+background: -moz-linear-gradient(58deg, rgba(247,241,241,1) 0%, rgba(242,242,236,1) 100%);
+background: -webkit-linear-gradient(58deg, rgba(247,241,241,1) 0%, rgba(242,242,236,1) 100%);
+background: linear-gradient(58deg, rgba(247,241,241,1) 0%, rgba(242,242,236,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f7f1f1",endColorstr="#f2f2ec",GradientType=1);
+height: 100vh;
+}
+
